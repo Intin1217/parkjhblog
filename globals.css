@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
