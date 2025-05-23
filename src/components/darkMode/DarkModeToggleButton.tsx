@@ -40,11 +40,9 @@ export default function DarkModeToggleButton() {
     setMounted(true);
   }, []);
 
-  // 시스템 다크 모드 감지 로직을 별도 함수로 추출
   const isSystemDarkMode = () =>
     window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-  // if-else 체인을 switch 문으로 리팩토링하여 가독성 향상
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
 
