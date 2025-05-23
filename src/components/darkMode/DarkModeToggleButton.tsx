@@ -1,0 +1,114 @@
+'use client';
+
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import { setDarkMode } from '@/store/slices/darkModeSlice';
+import { useTheme } from 'next-themes';
+import { MoonIcon, SunIcon, ComputerIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+const THEME = {
+  DARK: 'dark',
+  LIGHT: 'light',
+  SYSTEM: 'system',
+};
+
+const ICON_SIZES = {
+  DEFAULT: 'h-5 w-5',
+  SMALL: 'h-4 w-4',
+};
+
+export default function DarkModeToggleButton() {
+  const dispatch = useDispatch();
+  const isDarkMode = useSelector(
+    (state: RootState) => state.isDarkMode.isDarkMode,
+  );
+  const { setTheme, theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // 시스템 다크 모드 감지 로직을 별도 함수로 추출
+  const isSystemDarkMode = () =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  // if-else 체인을 switch 문으로 리팩토링하여 가독성 향상
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme);
+
+    switch (newTheme) {
+      case THEME.DARK:
+        dispatch(setDarkMode(true));
+        break;
+      case THEME.LIGHT:
+        dispatch(setDarkMode(false));
+        break;
+      case THEME.SYSTEM:
+        dispatch(setDarkMode(isSystemDarkMode()));
+        break;
+    }
+  };
+
+  const isActive = (themeOption: string) => mounted && theme === themeOption;
+
+  const getThemeIcon = () => {
+    if (!mounted) return <SunIcon className={ICON_SIZES.DEFAULT} />;
+
+    return resolvedTheme === THEME.DARK ? (
+      <MoonIcon className={ICON_SIZES.DEFAULT} />
+    ) : (
+      <SunIcon className={ICON_SIZES.DEFAULT} />
+    );
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="w-10 cursor-pointer">
+          {getThemeIcon()}
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56">
+        <DropdownMenuLabel className="text-center">
+          다크모드 설정
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem
+            onClick={() => handleThemeChange(THEME.DARK)}
+            className={isActive(THEME.DARK) ? 'bg-accent' : ''}
+          >
+            <MoonIcon className={`mr-2 ${ICON_SIZES.SMALL}`} />
+            다크 모드
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => handleThemeChange(THEME.LIGHT)}
+            className={isActive(THEME.LIGHT) ? 'bg-accent' : ''}
+          >
+            <SunIcon className={`mr-2 ${ICON_SIZES.SMALL}`} />
+            라이트 모드
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => handleThemeChange(THEME.SYSTEM)}
+            className={isActive(THEME.SYSTEM) ? 'bg-accent' : ''}
+          >
+            <ComputerIcon className={`mr-2 ${ICON_SIZES.SMALL}`} />
+            시스템 설정
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
