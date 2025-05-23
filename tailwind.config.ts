@@ -1,4 +1,7 @@
-module.exports = {
+import type { Config } from 'tailwindcss';
+
+export default {
+  darkMode: 'class',
   content: [
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -8,4 +11,4 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-};
+} satisfies Config;
