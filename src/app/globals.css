@@ -18,8 +18,7 @@ body {
 }
 
 @theme {
-    --color-dark-line: #454545;
-    --color-dark-hover: #454545;
+    --color-dark-point: #454545;
     --color-dark: #212121;
 
     --color-dark-50: #f6f6f6;
@@ -33,7 +32,7 @@ body {
     --color-dark-800: #454545;
     --color-dark-900: #3d3d3d;
 
-    --color-light-line: #d5dde2;
+    --color-light-point: #d5dde2;
     --color-light: #f9fafb;
 
     --color-light-100: #eceff2;
