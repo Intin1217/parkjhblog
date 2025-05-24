@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Topbar() {
   return (
-    <header className="flex items-center justify-between p-4 w-full fixed top-0 border-b border-dark-800 bg-white dark:bg-dark">
+    <header className="flex items-center justify-between p-4 w-full fixed top-0 border-b border-lightline dark:border-dark-line bg-white dark:bg-dark">
       <div>
         <h1 className="text-lg">박주호</h1>
       </div>

@@ -28,7 +28,7 @@ export default function RootLayout({
           <StoreProvider>
             <DarkModeSync />
             <Topbar />
-            <main className="min-h-screen pt-18 overflow-auto flex flex-col items-center">
+            <main className="min-h-screen pt-17 overflow-auto flex flex-col items-center">
               {children}
             </main>
           </StoreProvider>

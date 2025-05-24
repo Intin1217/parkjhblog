@@ -74,11 +74,14 @@ export default function DarkModeToggleButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-10 cursor-pointer">
+        <Button
+          variant="ghost"
+          className="w-10 cursor-pointer dark:bg-dark dark:hover:bg-dark-hover"
+        >
           {getThemeIcon()}
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent className="w-56 dark:bg-dark">
         <DropdownMenuLabel className="text-center">
           다크모드 설정
         </DropdownMenuLabel>
@@ -86,21 +89,21 @@ export default function DarkModeToggleButton() {
         <DropdownMenuGroup>
           <DropdownMenuItem
             onClick={() => handleThemeChange(THEME.DARK)}
-            className={isActive(THEME.DARK) ? 'bg-accent' : ''}
+            className={`cursor-pointer ${isActive(THEME.DARK) ? 'dark:bg-dark-hover dark:hover:bg-dark-hover' : 'hover:bg-dark-200'}`}
           >
             <MoonIcon className={`mr-2 ${ICON_SIZES.SMALL}`} />
             다크 모드
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => handleThemeChange(THEME.LIGHT)}
-            className={isActive(THEME.LIGHT) ? 'bg-accent' : ''}
+            className={`cursor-pointer ${isActive(THEME.LIGHT) ? 'bg-light hover:bg-dark-200' : 'dark:hover:bg-dark-hover'}`}
           >
             <SunIcon className={`mr-2 ${ICON_SIZES.SMALL}`} />
             라이트 모드
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => handleThemeChange(THEME.SYSTEM)}
-            className={isActive(THEME.SYSTEM) ? 'bg-accent' : ''}
+            className="cursor-pointer bg-light hover:bg-dark-200 dark:bg-dark dark:hover:bg-dark-hover"
           >
             <ComputerIcon className={`mr-2 ${ICON_SIZES.SMALL}`} />
             시스템 설정
