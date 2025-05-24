@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import img from '@/assets/tempimg.svg';
 import Link from 'next/link';
+import Section from '@/components/ui/Section';
 
 export default function Introduction() {
   return (
-    <section className="flex flex-col items-center lg:flex-row w-full lg:px-72 mx-auto px-4 bg-light dark:bg-dark-900">
+    <Section className="items-center lg:flex-row bg-light dark:bg-dark-900">
       <div className="w-1/2 flex flex-col items-start justify-center py-20 px-10 gap-6">
         <h1 className="text-4xl">
           안녕하세요, 프론트엔드 개발자 <br />
@@ -23,7 +24,7 @@ export default function Introduction() {
           </Link>
           <Link
             href="/"
-            className="py-2 px-2 rounded-sm bg-white text-black border border-dark-200 hover:bg-dark-200 dark:bg-dark dark:hover:bg-dark-hover dark:border-dark-line dark:text-white"
+            className="py-2 px-2 rounded-sm bg-white text-black border border-dark-200 hover:bg-dark-200 dark:bg-dark dark:hover:bg-dark-point dark:border-dark-point dark:text-white"
           >
             블로그 읽기
           </Link>
@@ -34,6 +35,6 @@ export default function Introduction() {
           <Image className="rounded-full" src={img} alt="프로필 사진" />
         </figure>
       </div>
-    </section>
+    </Section>
   );
 }

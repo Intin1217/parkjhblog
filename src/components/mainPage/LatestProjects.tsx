@@ -1,8 +1,7 @@
+import Section from '@/components/ui/Section';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import PostCard from '@/components/card/PostCard';
-import { PostCardType } from '@/type/PostCard/PostCardType';
-import Section from '@/components/ui/Section';
 
 const mockData = [
   {
@@ -19,29 +18,22 @@ const mockData = [
     description: 'Next.js Blog Mock Data2',
     created_at: '2019-03-17T00:00:00.000Z',
   },
-  {
-    id: 3,
-    tag: ['React', 'Next.js'],
-    title: '임시 데이터 3번',
-    description: 'Next.js Blog Mock Data3',
-    created_at: '2019-03-19T00:00:00.000Z',
-  },
-] as PostCardType[];
+];
 
-export default function LatestPosts() {
+export default function LatestProjects() {
   return (
     <Section className="gap-6 h-auto mt-10">
       <div className="flex items-center justify-between w-full">
-        <h1 className="text-2xl">최신 블로그 포스트</h1>
+        <h1 className="text-2xl">주요 프로젝트</h1>
         <Link href="/" className="flex gap-2">
-          모든 포스트 보기 <ArrowRight />
+          모든 프로젝트 보기 <ArrowRight />
         </Link>
       </div>
       <div>
-        <ul className="flex items-center justify-between">
+        <ul className="flex gap-4">
           {mockData.map((item) => (
-            <li key={item.id}>
-              <PostCard data={item} />
+            <li key={item.id} className="flex justify-center w-full">
+              <PostCard data={item} project={true} />
             </li>
           ))}
         </ul>
