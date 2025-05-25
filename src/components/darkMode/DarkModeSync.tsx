@@ -19,20 +19,21 @@ export function DarkModeSync() {
   );
   const isInitialized = useRef(false);
   const isFirstRender = useRef(true);
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
-      dispatch(setDarkMode(true));
-      return;
-    }
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !isMounted.current) return;
 
     if (isInitialized.current) return;
 
-    if (!resolvedTheme) {
-      dispatch(setDarkMode(true));
-      document.documentElement.classList.add('dark');
-      return;
-    }
+    if (!resolvedTheme) return;
 
     const isDark = resolvedTheme === THEME.DARK;
     dispatch(setDarkMode(isDark));
@@ -40,6 +41,7 @@ export function DarkModeSync() {
   }, [resolvedTheme, dispatch]);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !isMounted.current) return;
     if (!isInitialized.current || !resolvedTheme) return;
 
     if (isFirstRender.current) {
@@ -56,6 +58,7 @@ export function DarkModeSync() {
   }, [resolvedTheme, isDarkMode, dispatch]);
 
   useEffect(() => {
+    if (typeof window === 'undefined' || !isMounted.current) return;
     if (!isInitialized.current) return;
 
     if (isFirstRender.current) {

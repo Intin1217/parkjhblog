@@ -6,6 +6,7 @@ import ThemeProvider from '@/app/ThemeProvider';
 import { DarkModeSync } from '@/components/darkMode/DarkModeSync';
 import Topbar from '@/components/topbar/Topbar';
 import Footer from '@/components/footer/Footer';
+import ThemeInitScript from '@/utils/ThemeInitScript';
 
 export const metadata: Metadata = {
   title: '박주호 블로그',
@@ -19,6 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <ThemeInitScript />
+      </head>
       <body>
         <ThemeProvider
           attribute="class"
