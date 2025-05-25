@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import React from 'react';
+import React, { Suspense } from 'react';
 import './globals.css';
 import StoreProvider from '@/app/StoreProvider';
 import ThemeProvider from '@/app/ThemeProvider';
@@ -11,6 +11,10 @@ export const metadata: Metadata = {
   title: '박주호 블로그',
   description: '박주호 블로그',
 };
+
+function DelayedRender({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={null}>{children}</Suspense>;
+}
 
 export default function RootLayout({
   children,
@@ -28,11 +32,13 @@ export default function RootLayout({
         >
           <StoreProvider>
             <DarkModeSync />
-            <Topbar />
-            <main className="min-h-screen pt-17 overflow-auto flex flex-col items-center">
-              {children}
-            </main>
-            <Footer />
+            <DelayedRender>
+              <Topbar />
+              <main className="min-h-screen pt-17 overflow-auto flex flex-col items-center">
+                {children}
+              </main>
+              <Footer />
+            </DelayedRender>
           </StoreProvider>
         </ThemeProvider>
       </body>
