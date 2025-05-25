@@ -25,7 +25,7 @@ export function DarkModeSync() {
     const isDark = resolvedTheme === THEME.DARK;
     dispatch(setDarkMode(isDark));
     isInitialized.current = true;
-  }, []);
+  }, [dispatch, resolvedTheme]);
 
   useEffect(() => {
     if (!isInitialized.current || !resolvedTheme) return;
