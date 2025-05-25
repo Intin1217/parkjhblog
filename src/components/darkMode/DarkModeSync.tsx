@@ -21,11 +21,18 @@ export function DarkModeSync() {
   const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {
+      dispatch(setDarkMode(true));
+      return;
+    }
 
     if (isInitialized.current) return;
 
-    if (!resolvedTheme) return;
+    if (!resolvedTheme) {
+      dispatch(setDarkMode(true));
+      document.documentElement.classList.add('dark');
+      return;
+    }
 
     const isDark = resolvedTheme === THEME.DARK;
     dispatch(setDarkMode(isDark));
