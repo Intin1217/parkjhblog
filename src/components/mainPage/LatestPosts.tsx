@@ -38,7 +38,7 @@ export default function LatestPosts() {
         </Link>
       </div>
       <div>
-        <ul className="flex items-center justify-between">
+        <ul className="flex flex-col gap-2 lg:flex-row items-center justify-between">
           {mockData.map((item) => (
             <li key={item.id}>
               <PostCard data={item} />
