@@ -13,7 +13,7 @@ const THEME = {
 
 export function DarkModeSync() {
   const dispatch = useDispatch();
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const isDarkMode = useSelector(
     (state: RootState) => state.isDarkMode.isDarkMode,
   );
@@ -25,7 +25,7 @@ export function DarkModeSync() {
     const isDark = resolvedTheme === THEME.DARK;
     dispatch(setDarkMode(isDark));
     isInitialized.current = true;
-  }, []);
+  }, [dispatch, resolvedTheme]);
 
   useEffect(() => {
     if (!isInitialized.current || !resolvedTheme) return;
