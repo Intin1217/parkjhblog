@@ -18,9 +18,10 @@ export function DarkModeSync() {
     (state: RootState) => state.isDarkMode.isDarkMode,
   );
   const isInitialized = useRef(false);
-  const prevResolvedTheme = useRef(resolvedTheme);
-  const prevIsDarkMode = useRef(isDarkMode);
+  const prevResolvedTheme = useRef<string | undefined>(undefined);
+  const prevIsDarkMode = useRef<boolean | undefined>(undefined);
 
+  // 초기화 처리
   useEffect(() => {
     if (!resolvedTheme) return;
 
@@ -32,29 +33,29 @@ export function DarkModeSync() {
   }, []);
 
   useEffect(() => {
-    if (!isInitialized.current || !resolvedTheme) return;
-
     if (
-      resolvedTheme !== prevResolvedTheme.current &&
-      (resolvedTheme === THEME.DARK) !== isDarkMode
-    ) {
-      const isDark = resolvedTheme === THEME.DARK;
+      !isInitialized.current ||
+      !resolvedTheme ||
+      resolvedTheme === prevResolvedTheme.current
+    )
+      return;
+
+    const isDark = resolvedTheme === THEME.DARK;
+
+    if (isDark !== prevIsDarkMode.current) {
       dispatch(setDarkMode(isDark));
-      prevResolvedTheme.current = resolvedTheme;
+      prevIsDarkMode.current = isDark;
     }
-  }, [resolvedTheme, isDarkMode, dispatch]);
+
+    prevResolvedTheme.current = resolvedTheme;
+  }, [resolvedTheme, dispatch]);
 
   useEffect(() => {
-    if (!isInitialized.current) return;
+    if (!isInitialized.current || isDarkMode === prevIsDarkMode.current) return;
 
-    if (
-      isDarkMode !== prevIsDarkMode.current &&
-      (isDarkMode ? THEME.DARK : THEME.LIGHT) !== resolvedTheme
-    ) {
-      const newTheme = isDarkMode ? THEME.DARK : THEME.LIGHT;
-      setTheme(newTheme);
-      prevIsDarkMode.current = isDarkMode;
-    }
+    const newTheme = isDarkMode ? THEME.DARK : THEME.LIGHT;
+    setTheme(newTheme);
+    prevIsDarkMode.current = isDarkMode;
   }, [isDarkMode, setTheme]);
 
   return null;
