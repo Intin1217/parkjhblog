@@ -18,17 +18,27 @@ export function DarkModeSync() {
     (state: RootState) => state.isDarkMode.isDarkMode,
   );
   const isInitialized = useRef(false);
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    if (isInitialized.current) return;
+
     if (!resolvedTheme) return;
 
     const isDark = resolvedTheme === THEME.DARK;
     dispatch(setDarkMode(isDark));
     isInitialized.current = true;
-  }, []);
+  }, [resolvedTheme, dispatch]);
 
   useEffect(() => {
     if (!isInitialized.current || !resolvedTheme) return;
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
     const isDark = resolvedTheme === THEME.DARK;
     const themeChanged = isDark !== isDarkMode;
@@ -40,6 +50,11 @@ export function DarkModeSync() {
 
   useEffect(() => {
     if (!isInitialized.current) return;
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
     const newTheme = isDarkMode ? THEME.DARK : THEME.LIGHT;
     setTheme(newTheme);

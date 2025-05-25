@@ -10,7 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 import { setDarkMode } from '@/store/slices/darkModeSlice';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon, ComputerIcon } from 'lucide-react';
@@ -33,11 +34,14 @@ export default function DarkModeToggleButton() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
     setMounted(true);
   }, []);
 
-  const isSystemDarkMode = () =>
-    window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isSystemDarkMode = () => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
 
   const handleThemeChange = (newTheme: string) => {
     setTheme(newTheme);
@@ -66,6 +70,14 @@ export default function DarkModeToggleButton() {
       <SunIcon className={ICON_SIZES.DEFAULT} />
     );
   };
+
+  if (!mounted) {
+    return (
+      <Button variant="ghost" className="w-10 cursor-pointer">
+        <SunIcon className={ICON_SIZES.DEFAULT} />
+      </Button>
+    );
+  }
 
   return (
     <DropdownMenu>
