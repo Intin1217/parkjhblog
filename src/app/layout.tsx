@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import React, { Suspense } from 'react';
+import React from 'react';
 import './globals.css';
 import StoreProvider from '@/app/StoreProvider';
 import ThemeProvider from '@/app/ThemeProvider';
