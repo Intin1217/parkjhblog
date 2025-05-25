@@ -22,6 +22,8 @@ export default function PostCard({
   data: PostCardType;
   project?: boolean;
 }) {
+  if (!data) return null;
+
   const { id, tag, title, description } = data;
 
   return (
