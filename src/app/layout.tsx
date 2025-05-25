@@ -12,10 +12,6 @@ export const metadata: Metadata = {
   description: '박주호 블로그',
 };
 
-function DelayedRender({ children }: { children: React.ReactNode }) {
-  return <Suspense fallback={null}>{children}</Suspense>;
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -32,13 +28,11 @@ export default function RootLayout({
         >
           <StoreProvider>
             <DarkModeSync />
-            <DelayedRender>
-              <Topbar />
-              <main className="min-h-screen pt-17 overflow-auto flex flex-col items-center">
-                {children}
-              </main>
-              <Footer />
-            </DelayedRender>
+            <Topbar />
+            <main className="min-h-screen pt-17 overflow-auto flex flex-col items-center">
+              {children}
+            </main>
+            <Footer />
           </StoreProvider>
         </ThemeProvider>
       </body>
