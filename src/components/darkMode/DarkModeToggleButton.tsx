@@ -10,8 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { useDispatch } from 'react-redux';
 import { setDarkMode } from '@/store/slices/darkModeSlice';
 import { useTheme } from 'next-themes';
 import { MoonIcon, SunIcon, ComputerIcon } from 'lucide-react';
