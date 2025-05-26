@@ -12,11 +12,11 @@ export default function ToWork() {
         </p>
       </div>
       <div className="flex gap-4">
-        <Button>
+        <Button className="bg-transparent border border-white dark:text-white">
           <Mail className="mr-2 h-4 w-4" /> 이메일 보내기
         </Button>
-        <Button>
-          <SiGithub size={24} color="#181717" /> GitHub
+        <Button className="bg-transparent border border-white dark:text-white">
+          <SiGithub size={24} className="text-white" /> GitHub
         </Button>
       </div>
     </section>
