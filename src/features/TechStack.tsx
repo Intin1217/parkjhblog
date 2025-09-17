@@ -1,5 +1,5 @@
 import Section from '@/components/ui/Section';
-import TechCard from '@/components/card/TechCard';
+import TechCard from '@/features/TechCard';
 import {
   SiJavascript,
   SiTypescript,
