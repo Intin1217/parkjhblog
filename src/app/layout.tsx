@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import React from 'react';
 import './globals.css';
-import StoreProvider from '@/app/StoreProvider';
-import ThemeProvider from '@/app/ThemeProvider';
-import { DarkModeSync } from '@/components/darkMode/DarkModeSync';
-import Topbar from '@/components/topbar/Topbar';
-import Footer from '@/components/footer/Footer';
+import StoreProvider from '@/components/providers/StoreProvider';
+import ThemeProvider from '@/components/providers/ThemeProvider';
+import { DarkModeSync } from '@/components/layout/DarkModeSync';
+import Topbar from '@/components/layout/Topbar';
+import Footer from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: '박주호 블로그',

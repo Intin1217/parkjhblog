@@ -1,8 +1,8 @@
-import Introduction from '@/components/mainPage/Introduction';
-import LatestPosts from '@/components/mainPage/LatestPosts';
-import LatestProjects from '@/components/mainPage/LatestProjects';
-import ToWork from '@/components/mainPage/ToWork';
-import TechStack from '@/components/mainPage/TechStack';
+import Introduction from '@/features/Introduction';
+import LatestPosts from '@/features/LatestPosts';
+import LatestProjects from '@/features/LatestProjects';
+import ToWork from '@/features/ToWork';
+import TechStack from '@/features/TechStack';
 
 export default function Home() {
   return (

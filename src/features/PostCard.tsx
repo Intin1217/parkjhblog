@@ -10,7 +10,7 @@ import img from '@/assets/tempimg.svg';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { PostCardType } from '@/type/PostCard/PostCardType';
+import { PostCardType } from '@/types/PostCard/PostCardType';
 import { Badge } from '@/components/ui/badge';
 
 //TODO 임시 타입
@@ -43,7 +43,7 @@ export default function PostCard({
         <div>
           <ul className="flex gap-2">
             {tag &&
-              tag.map((item, index) => (
+              tag.map((item: string, index: number) => (
                 <li key={`${id - index}`}>
                   <Badge
                     variant="secondary"

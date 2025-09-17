@@ -1,11 +1,11 @@
-import DarkModeToggleButton from '@/components/darkMode/DarkModeToggleButton';
+import DarkModeToggleButton from '@/components/ui/DarkModeToggleButton';
 import Link from 'next/link';
 
 export default function Topbar() {
   return (
     <header className="flex items-center justify-between p-4 w-full fixed top-0 border-b border-lightline dark:border-dark-point bg-white dark:bg-dark">
       <div>
-        <h1 className="text-lg">박주호</h1>
+        <h1 className="text-lg">PJH</h1>
       </div>
       <nav className="flex items-center gap-2">
         <div>
